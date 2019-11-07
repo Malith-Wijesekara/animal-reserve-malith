@@ -3,7 +3,7 @@ let rekog = new AWS.Rekognition();
 
 exports.handler = function(event, context, callback) {
     //console.log(JSON.stringify(event,null,2));
-    let s3 = event.Records(0).s3;
+    let s3 = event.Records[0].s3;
     rekog.detectLabels({
         Image:{
             S3Object:{
