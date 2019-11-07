@@ -1,0 +1,106 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "c45c1a59-df46-46d4-94e1-4d98b316628a": {
+        "id": "c45c1a59-df46-46d4-94e1-4d98b316628a",
+        "parent": null,
+        "name": "animal-reserve-malith",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "3392d4fb-76c8-4e61-8b01-b9bbded42e3f"
+        ],
+        "isRemovable": false,
+        "filePath": "animal-reserve-malith"
+      },
+      "3392d4fb-76c8-4e61-8b01-b9bbded42e3f": {
+        "id": "3392d4fb-76c8-4e61-8b01-b9bbded42e3f",
+        "parent": "c45c1a59-df46-46d4-94e1-4d98b316628a",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "animal-reserve-malith/lambda.js",
+        "code": "exports.handler = function(event, context, callback) {\n    console.log(JSON.stringify(event,null,2));\n    callback(null, event);//how we signal back to the system\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "s3slappforgetest",
+            "config": {
+              "type": "s3:ObjectCreated:*",
+              "keyPrefix": "",
+              "keySuffix": ""
+            }
+          }
+        ],
+        "testCases": {
+          "025abeec-72f6-410c-b560-735dd776eb9e": {
+            "id": "025abeec-72f6-410c-b560-735dd776eb9e",
+            "name": "Unnamed event",
+            "functionId": "3392d4fb-76c8-4e61-8b01-b9bbded42e3f",
+            "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
+          }
+        }
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "c45c1a59-df46-46d4-94e1-4d98b316628a",
+    "openFiles": [
+      "3392d4fb-76c8-4e61-8b01-b9bbded42e3f"
+    ],
+    "currentFileId": "3392d4fb-76c8-4e61-8b01-b9bbded42e3f",
+    "resources": {
+      "s3slappforgetest": {
+        "name": "s3slappforgetest",
+        "type": "S3",
+        "config": {
+          "mode": 1,
+          "bucket": {
+            "region": "us-east-2",
+            "name": "slappforgetest"
+          }
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "animal-reserve-malith",
+    "projectDescription": "detect and recode  safari name",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-2",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1573109447458
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "animal-reserve-malith",
+      "url": "https://github.com/Malith-Wijesekara/animal-reserve-malith"
+    }
+  }
+}
