@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "animal-reserve-malith/lambda.js",
-        "code": "exports.handler = function(event, context, callback) {\n    console.log(JSON.stringify(event,null,2));\n    callback(null, event);//how we signal back to the system\n}",
+        "code": "let AWS = require('aws-sdk');\nlet rekog = new AWS.Rekognition();\n\nexports.handler = function(event, context, callback) {\n    //console.log(JSON.stringify(event,null,2));\n    let s3 = event.Records(0).s3;\n    rekog.detectLabels({\n        Image:{\n            S3Object:{\n                Bucket:s3.Bucket.name,\n                Name: s3.Object.key\n            }\n        },\n        MaxLabels:1\n    }).promise().then(data =>{\n        console.log(data);\n        callback(null, {});\n    }).catch(err => callback(err));\n    callback(null, event);//how we signal back to the system\n}",
         "config": {
           "runtime": "nodejs8.10",
           "handler": "handler",
@@ -47,6 +47,25 @@
             "functionId": "3392d4fb-76c8-4e61-8b01-b9bbded42e3f",
             "event": "{\n    \"key1\": \"value1\",\n    \"key2\": \"value2\",\n    \"key3\": \"value3\"\n}"
           }
+        },
+        "customSecurityPolicy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Resource": "*",
+              "Action": [
+                "rekognition:*"
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::slp-animal-uploads/*",
+              "Action": [
+                "s3:GetObject"
+              ]
+            }
+          ]
         }
       }
     },
@@ -94,7 +113,7 @@
     "projectRegion": "us-east-2",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1573109447458
+    "lastSave": 1573111342503
   },
   "VCS_STATE": {
     "provider": "GitHub",
